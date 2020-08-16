@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.proy.pma.dato.ChartData;
+import com.proy.pma.dto.ChartData;
 import com.proy.pma.entities.Project;
 
 public interface ProjectRepository extends CrudRepository<Project, Long>{ // Long is the type of id. 

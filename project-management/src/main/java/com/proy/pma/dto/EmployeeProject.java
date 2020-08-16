@@ -1,4 +1,4 @@
-package com.proy.pma.dato;
+package com.proy.pma.dto;
 
 public interface EmployeeProject {
 	

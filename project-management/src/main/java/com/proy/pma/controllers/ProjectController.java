@@ -8,26 +8,26 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.proy.pma.dao.EmployeeRepository;
-import com.proy.pma.dao.ProjectRepository;
 import com.proy.pma.entities.Employee;
 import com.proy.pma.entities.Project;
+import com.proy.pma.services.EmployeeService;
+import com.proy.pma.services.ProjectService;
 
 @Controller
 @RequestMapping("/projects")
 public class ProjectController {
 	
 	@Autowired  // this auto create an instance and inject it.
-	ProjectRepository proRepo;
+	ProjectService proService;
+	//ProjectRepository proRepo;
 	
 	@Autowired
-	EmployeeRepository empRepo;
+	EmployeeService empService;
+	//EmployeeRepository empRepo;
 	
 	@GetMapping
 	public String displayProjects(Model model) {
-		List<Project> projects = proRepo.findAll();
+		List<Project> projects = proService.getAll();
 		model.addAttribute("projects", projects);
 		return "projects/list-projects";
 	}
@@ -40,7 +40,7 @@ public class ProjectController {
 		model.addAttribute("project", aProject); // this will bind "project" with th:object="${project}" in the HTML
 		
 		// Send the list of employees
-		List<Employee> employees = empRepo.findAll();
+		List<Employee> employees = empService.getAll();
 		model.addAttribute("allEmployees", employees);
 		
 		return "projects/new-project";
@@ -49,7 +49,7 @@ public class ProjectController {
 	@PostMapping("/save")
 	public String createProject(Project project,  Model model) { //@RequestParam List<Long> employees,
 		
-		proRepo.save(project); // one of the methods inside CrudRepository that was extended inside ProjectRepository
+		proService.save(project); // one of the methods inside CrudRepository that was extended inside ProjectRepository
 		
 		/*  Deprecated by @ManyToMany
 		Iterable<Employee> chosenEmployees = empRepo.findAllById(employees);

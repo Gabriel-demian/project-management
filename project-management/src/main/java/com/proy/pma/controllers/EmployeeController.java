@@ -9,19 +9,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.proy.pma.dao.EmployeeRepository;
 import com.proy.pma.entities.Employee;
+import com.proy.pma.services.EmployeeService;
 
 @Controller
 @RequestMapping("/employees")
 public class EmployeeController {
 	
 	@Autowired  // this auto create an instance and inject it.
-	EmployeeRepository empRepo;
+	EmployeeService empService;
+	//EmployeeRepository empRepo;
 	
 	@GetMapping
 	public String displayEmployees(Model model) {
-		List<Employee> employees = empRepo.findAll();
+		List<Employee> employees = empService.getAll();
 		model.addAttribute("employees", employees);
 		return "employees/list-employees";
 	}
@@ -38,8 +39,8 @@ public class EmployeeController {
 	
 	@PostMapping("/save")
 	public String createEmployee(Employee employee, Model model) {
-		empRepo.save(employee); // one of the methods inside CrudRepository that was extended inside EmployeeRepository
-		
+		//empRepo.save(employee); // one of the methods inside CrudRepository that was extended inside EmployeeRepository
+		empService.save(employee);
 		// use a redirect to prevent duplicate submissions
 		return "redirect:/employees";
 	}

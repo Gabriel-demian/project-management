@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.proy.pma.dato.EmployeeProject;
+import com.proy.pma.dto.EmployeeProject;
 import com.proy.pma.entities.Employee;
 
 public interface EmployeeRepository extends CrudRepository<Employee, Long>{
