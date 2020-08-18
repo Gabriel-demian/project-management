@@ -35,6 +35,10 @@ public class Project {
 	) 
 	private List<Employee> employees;
 
+	
+	//******************************
+	//**Constructor
+	//******************************
 	public Project() {
 		
 	}
@@ -46,7 +50,9 @@ public class Project {
 		this.description = description;
 	}
 	
-	
+	//******************************
+	//**GETTERS AND SETTERS
+	//******************************
 	public List<Employee> getEmployees() {
 		return employees;
 	}

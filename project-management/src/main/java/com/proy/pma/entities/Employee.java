@@ -35,6 +35,9 @@ public class Employee {
 	)
 	private List<Project> projects;
 	
+	//******************************
+	//**Constructor
+	//******************************
 	public Employee() {	
 	}
 	
@@ -45,7 +48,9 @@ public class Employee {
 		this.email = email;
 	}
 	
-	
+	//******************************
+	//**GETTERS AND SETTERS
+	//******************************
 	public List<Project> getProjects() {
 		return projects;
 	}
