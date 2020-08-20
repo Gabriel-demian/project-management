@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Employee {
 	
@@ -33,6 +35,8 @@ public class Employee {
 		joinColumns= @JoinColumn(name="employee_id"), 		// the key from the project will be employee_id
 		inverseJoinColumns= @JoinColumn(name="project_id")	// we give the name of the key of project 
 	)
+	
+	@JsonIgnore
 	private List<Project> projects;
 	
 	//******************************

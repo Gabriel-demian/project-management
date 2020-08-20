@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 // Entity means that this class must be stored in a database, if we dont have a table in the database this will create it. 
 @Entity
 public class Project {
@@ -33,6 +35,8 @@ public class Project {
 				joinColumns= @JoinColumn(name="project_id"), 		// the key from the project will be project_id
 				inverseJoinColumns= @JoinColumn(name="employee_id")	// we give the name of the key of employee 
 	) 
+	
+	@JsonIgnore
 	private List<Employee> employees;
 
 	
