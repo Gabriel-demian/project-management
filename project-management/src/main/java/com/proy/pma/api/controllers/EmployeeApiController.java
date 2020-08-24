@@ -3,7 +3,6 @@ package com.proy.pma.api.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import javax.validation.Valid;
 
 import com.proy.pma.dao.EmployeeRepository;
 import com.proy.pma.entities.Employee;
@@ -38,18 +38,18 @@ public class EmployeeApiController {
 	//@PostMapping(consumes = "application/json")	// we must specify the format that this method is going to accept 
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Employee create(@RequestBody Employee employee) {
+	public Employee create(@RequestBody @Valid Employee employee) {
 		return empRepo.save(employee);
 	}
 	
 	@PutMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public Employee update(@RequestBody @Validated Employee employee) {
+	public Employee update(@RequestBody @Valid Employee employee) {
 		return empRepo.save(employee);
 	}
 	
 	@PatchMapping(path="/{id}", consumes= "application/json")
-	public Employee partialUpdate(@PathVariable("id") long id, @RequestBody @Validated Employee patchEmployee) {
+	public Employee partialUpdate(@PathVariable("id") long id, @RequestBody @Valid Employee patchEmployee) {
 		Employee emp = empRepo.findById(id).get();
 		
 		if(patchEmployee.getEmail() != null) {

@@ -12,8 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 
 // Entity means that this class must be stored in a database, if we dont have a table in the database this will create it. 
 @Entity
@@ -23,10 +25,16 @@ public class Project {
 	@GeneratedValue (strategy=GenerationType.SEQUENCE, generator="project_seq")
 	@SequenceGenerator(name = "project_seq", sequenceName = "project_seq", allocationSize = 1)
 	private long projectId;
+	
+	@NotNull
+	@Size(min=2, max=50, message = "Name must be between 2 and 50 characters")
 	private String name;
 	
+	@NotNull
 	private String stage;	// NOTSTARTED, COMPLETED, INPROGRESS
 	
+	@NotNull
+	@Size(min=2, max=200, message = "Description must be between 2 and 200 characters")
 	private String description;
 	
 	//@OneToMany(mappedBy="project")

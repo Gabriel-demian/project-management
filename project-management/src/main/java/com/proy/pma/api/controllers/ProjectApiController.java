@@ -3,7 +3,6 @@ package com.proy.pma.api.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.proy.pma.dao.ProjectRepository;
 import com.proy.pma.entities.Project;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/app-api/projects")
@@ -36,19 +36,19 @@ public class ProjectApiController {
 	
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Project create(@RequestBody Project project) {
+	public Project create(@RequestBody @Valid Project project) {
 		return proyRepo.save(project);
 	}
 	
 	@PutMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public Project update(@RequestBody @Validated Project project) {
+	public Project update(@RequestBody @Valid Project project) {
 		return proyRepo.save(project);
 	}
 	
 	
 	@PatchMapping(path="/{id}", consumes= "application/json")
-	public Project partialUpdate(@PathVariable("id") long id, @RequestBody @Validated Project patchProject) {
+	public Project partialUpdate(@PathVariable("id") long id, @RequestBody @Valid Project patchProject) {
 		Project proy = proyRepo.findById(id).get();
 		
 		if(patchProject.getName() != null) {
