@@ -14,79 +14,64 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.proy.pma.dao.EmployeeRepository;
-import com.proy.pma.entities.Employee;
+import com.proy.pma.dao.ProjectRepository;
+import com.proy.pma.entities.Project;
 
 @RestController
-@RequestMapping("/app-api/employees")
-public class EmployeeApiController {
+@RequestMapping("/app-api/projects")
+public class ProjectApiController {
 	
 	@Autowired
-	EmployeeRepository empRepo;
+	ProjectRepository proyRepo;
 	
 	@GetMapping
-	public Iterable<Employee> getEmployees(){
-		return empRepo.findAll();
+	public Iterable<Project> getProjects(){
+		return proyRepo.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public Employee getEmployeeById(@PathVariable("id") Long id) {
-		return empRepo.findById(id).get();
+	public Project getProjectById(@PathVariable("id") Long id) {
+		return proyRepo.findById(id).get();
 	}
 	
-	//@PostMapping(consumes = "application/json")	// we must specify the format that this method is going to accept 
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Employee create(@RequestBody Employee employee) {
-		return empRepo.save(employee);
+	public Project create(@RequestBody Project project) {
+		return proyRepo.save(project);
 	}
 	
 	@PutMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public Employee update(@RequestBody @Validated Employee employee) {
-		return empRepo.save(employee);
+	public Project update(@RequestBody @Validated Project project) {
+		return proyRepo.save(project);
 	}
 	
+	
 	@PatchMapping(path="/{id}", consumes= "application/json")
-	public Employee partialUpdate(@PathVariable("id") long id, @RequestBody @Validated Employee patchEmployee) {
-		Employee emp = empRepo.findById(id).get();
+	public Project partialUpdate(@PathVariable("id") long id, @RequestBody @Validated Project patchProject) {
+		Project proy = proyRepo.findById(id).get();
 		
-		if(patchEmployee.getEmail() != null) {
-			emp.setEmail(patchEmployee.getEmail());
+		if(patchProject.getName() != null) {
+			proy.setName(patchProject.getName());
 		}
-		if(patchEmployee.getFirstName() != null) {
-			emp.setFirstName(patchEmployee.getFirstName());
+		if(patchProject.getStage() != null) {
+			proy.setStage(patchProject.getStage());
 		}
-		if(patchEmployee.getLastName() != null) {
-			emp.setLastName(patchEmployee.getLastName());
+		if(patchProject.getDescription() != null) {
+			proy.setDescription(patchProject.getDescription());
 		}
 		
-		return empRepo.save(emp);
-		
+		return proyRepo.save(proy);
 	}
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
 		try {
-			empRepo.deleteById(id);
-		} catch (EmptyResultDataAccessException e) {
-			// TODO: handle exception
+			proyRepo.deleteById(id);
 		}
-		
+		catch(EmptyResultDataAccessException e) {
+			
+		}
 	}
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-

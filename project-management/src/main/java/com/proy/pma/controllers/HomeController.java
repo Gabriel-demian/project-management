@@ -1,8 +1,6 @@
 package com.proy.pma.controllers;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,8 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.proy.pma.dao.EmployeeRepository;
-import com.proy.pma.dao.ProjectRepository;
 import com.proy.pma.dto.ChartData;
 import com.proy.pma.dto.EmployeeProject;
 import com.proy.pma.entities.Project;
@@ -41,7 +37,7 @@ public class HomeController {
 		
 		model.addAttribute("versionNumber", ver);
 		
-		Map<String, Object> map = new HashMap<>();
+		//Map<String, Object> map = new HashMap<>();
 		
 		// we are querying the database for projects
 		List<Project> projects = proService.getAll();
