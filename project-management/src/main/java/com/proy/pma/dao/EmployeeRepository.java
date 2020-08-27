@@ -3,12 +3,14 @@ package com.proy.pma.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.proy.pma.dto.EmployeeProject;
 import com.proy.pma.entities.Employee;
 
-public interface EmployeeRepository extends CrudRepository<Employee, Long>{
+@RepositoryRestResource(collectionResourceRel = "apiemployees", path ="apiemployees")
+public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long>{
 
 	@Override	// we override the method of the CrudRepository so we can pass a List of Employee
 	public List<Employee> findAll();

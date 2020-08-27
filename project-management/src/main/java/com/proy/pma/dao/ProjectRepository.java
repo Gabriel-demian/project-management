@@ -3,12 +3,14 @@ package com.proy.pma.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.proy.pma.dto.ChartData;
 import com.proy.pma.entities.Project;
 
-public interface ProjectRepository extends CrudRepository<Project, Long>{ // Long is the type of id. 
+@RepositoryRestResource(collectionResourceRel = "apiprojects", path ="apiprojects")
+public interface ProjectRepository extends PagingAndSortingRepository<Project, Long>{ // Long is the type of id. 
 	
 	@Override	// we override the method of the CrudRepository so we can pass a List of Project
 	public List<Project> findAll();
