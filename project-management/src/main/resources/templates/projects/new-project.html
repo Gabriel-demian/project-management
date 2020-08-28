@@ -6,31 +6,41 @@
 
 <body>
 	<nav th:replace="layouts :: navbar"></nav>
-	
-	<div class="form-group">
+	<br/>
+	<div class="container">
 		<!--  <form action="/projects/save" th:object="${project}" method="POST" > -->
-		<form th:action="@{/projects/save}" th:object="${project}" method="POST">
-			<input  class="form-control" type="text" placeholder="Project Name" th:field="${project.name}">
-
-			<select class="form-control form-control-sm" th:field="${project.stage}">
-				<option th:value="NOTSTARTED">Not Started</option>
-				<option th:value="INPROGRESS">In Progress</option>
-				<option th:value="COMPLETED">Completed</option>
-			</select>
-
-			<textarea class="form-control"  type="text" placeholder="Enter Project Description" th:field="${project.description}"></textarea>
+		<form th:action="@{/projects/save}" th:object="${project}" method="POST" >
+		
+			<div class="row col-lg-4 col-lg-offset-4" >
+				<input  class="form-control" type="text" placeholder="Project Name" th:field="${project.name}">
+			</div>
+			<br>
+			<div class="form-group row col-lg-4 col-lg-offset-4">
+				<select  th:field="${project.stage}">
+					<option th:value="NOTSTARTED">Not Started</option>
+					<option th:value="INPROGRESS">In Progress</option>
+					<option th:value="COMPLETED">Completed</option>
+				</select>
+			</div>
 			
-			<!-- employees is a property of project (we use * to indicate that it is a property of the parent), the simple way to use ${project.employees} -->
-			<select class="form-control form-control-sm" th:field="*{employees}" multiple="multiple">
-				<option th:each="employee : ${allEmployees}"
-						th:value = "${employee.employeeId}"
-						th:text= ${employee.firstName}> <!-- ${allEmployees} will define this variable in the java code -->
-			</select>
+			<div class="form-group row col-lg-4 col-lg-offset-4">
+				<textarea type="text" placeholder="Enter Project Description" th:field="${project.description}"></textarea>
+			</div>
+			
+			<div class="row col-lg-4 col-lg-offset-4">
+				<!-- employees is a property of project (we use * to indicate that it is a property of the parent), the simple way to use ${project.employees} -->
+				<select class="form-control form-control-sm" th:field="*{employees}" multiple="multiple">
+					<option th:each="employee : ${allEmployees}"
+							th:value = "${employee.employeeId}"
+							th:text= ${employee.firstName}> <!-- ${allEmployees} will define this variable in the java code -->
+				</select>
+			</div>
+			
+			<br>
 			
 			<!-- <input type="hidden" name="_csrf" th:value="${_csrf.token}" /> -->
+			<button class="btn btn-info col-2" type="submit">Enter Project</button>
 			
-			<button type="submit">Create Project</button>
-
 		</form>
 	</div>
 

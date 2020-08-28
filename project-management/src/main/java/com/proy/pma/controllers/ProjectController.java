@@ -40,7 +40,7 @@ public class ProjectController {
 		model.addAttribute("project", aProject); // this will bind "project" with th:object="${project}" in the HTML
 		
 		// Send the list of employees
-		List<Employee> employees = empService.getAll();
+		Iterable<Employee> employees = empService.getAll();
 		model.addAttribute("allEmployees", employees);
 		
 		return "projects/new-project";

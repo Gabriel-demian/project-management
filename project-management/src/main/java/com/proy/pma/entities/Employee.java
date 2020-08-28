@@ -13,11 +13,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.proy.pma.validators.UniqueValue;
-import com.sun.istack.NotNull;
 
 @Entity
 public class Employee {
@@ -27,16 +27,16 @@ public class Employee {
 	@SequenceGenerator(name = "employee_seq", sequenceName = "employee_seq", allocationSize = 1)
 	private long employeeId;
 	
-	@NotNull
+	@NotBlank(message="*Must give a first name")
 	@Size(min=2, max=50, message = "First Name must be between 2 and 50 characters")
 	private String firstName;
 	
-	@NotNull
+	@NotBlank(message="*Must give a last name")
 	@Size(min=2, max=50, message = "Last Name must be between 2 and 50 characters")
 	private String lastName;
 	
-	@NotNull
-	@Email(message = "Email should be valid")
+	@NotBlank
+	@Email(message="*Must be a valid email address")
 	//@Column(unique = true)
 	@UniqueValue
 	private String email;

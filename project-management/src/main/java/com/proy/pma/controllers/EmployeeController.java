@@ -2,9 +2,14 @@ package com.proy.pma.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +28,10 @@ public class EmployeeController {
 	
 	@GetMapping
 	public String displayEmployees(Model model) {
-		List<Employee> employees = empService.getAll();
+		
+		//List<Employee> employees = empService.getAll();
+		Iterable<Employee> employees = empService.getAll();
+		
 		model.addAttribute("employees", employees);
 		return "employees/list-employees";
 	}
@@ -39,7 +47,10 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/save")
-	public String createEmployee(Employee employee, Model model) {
+	public String createEmployee(Model model, @Valid Employee employee, Errors errors) {
+		if(errors.hasErrors())
+			return "employees/new-employee";
+		
 		//empRepo.save(employee); // one of the methods inside CrudRepository that was extended inside EmployeeRepository
 		empService.save(employee);
 		// use a redirect to prevent duplicate submissions
