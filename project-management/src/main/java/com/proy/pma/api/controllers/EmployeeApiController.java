@@ -74,19 +74,19 @@ public class EmployeeApiController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") Long id) {
 		try {
-			empRepo.deleteById(id);
-		} catch (EmptyResultDataAccessException e) {
-			// TODO: handle exception
+		empRepo.deleteById(id);
 		}
-		
+		catch(EmptyResultDataAccessException e) {
+			
+		}
 	}
 	
 	@GetMapping(params= {"page", "size"})
 	@ResponseStatus(HttpStatus.OK)
 	public Iterable<Employee> findPaginatedEmployees(@RequestParam("page") int page, 
-													@RequestParam("size") int size){
-		
+											@RequestParam("size") int size){
 		Pageable pageAndSize = PageRequest.of(page, size);
+		
 		return empRepo.findAll(pageAndSize);
 	}
 	

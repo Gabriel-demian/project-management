@@ -13,11 +13,13 @@ import com.proy.pma.entities.UserAccount;
 @Controller
 public class SecurityController {
 	
+	
 	@Autowired
 	UserAccountRepository accountRepo;
 	
 	@Autowired
 	BCryptPasswordEncoder bCryptEncoder;
+	
 	
 	@GetMapping("/register")
 	public String register(Model model) {
@@ -31,7 +33,6 @@ public class SecurityController {
 	public String saveUser(Model model, UserAccount user) {
 		user.setPassword(bCryptEncoder.encode(user.getPassword()));
 		accountRepo.save(user);
-		
 		return "redirect:/";
 	}
 }

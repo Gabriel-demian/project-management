@@ -8,19 +8,26 @@
 	<nav th:replace="layouts :: navbar"></nav>
 
 	<div class="form-group col-md-6">
-		<!-- using th:action=@{/employees/save} We don't need to use  <input type="hidden" name="_csrf" th:value="${_csrf.token}" /> -->
+		<!-- using th:action="@{/employees/save}" We don't need to use  <input type="hidden" name="_csrf" th:value="${_csrf.token}" /> -->
 		<!-- Thymeleaf automatically sends the token -->
-		<form th:action=@{/employees/save} th:object="${employee}" method="POST" >
-
-			<input type="text" placeholder="First Name: " th:field="${employee.firstName}">
+		<form th:action="@{/employees/save}" th:object="${employee}" method="POST">
 			
-			<input type="text" placeholder="Last Name: " th:field="${employee.lastName}">
+			<div class="form-group row">
+				<!-- This will be used to bind to the employee that was clicked on USED FOR UPDATES-->
+				<input type="hidden" th:field="${employee.employeeId}" /> 
+				<input type="text" placeholder="First Name: " th:field="${employee.firstName}"  />
+			</div>
 			
-			<input type="text" placeholder="Email: " th:field="${employee.email}">
+			<div class="form-group row">
+				<input type="text" placeholder="Last Name: " th:field="${employee.lastName}" />
+			</div>
 			
-			<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+			<div class="form-group row">
+				<input type="text" placeholder="Email: " th:field="${employee.email}" /> 
+				<!--<input type="hidden" name="_csrf" th:value="${_csrf.token}" />-->
+			</div>
 			
-			<button type="submit" >Create Employee</button>
+			<button type="submit">Create Employee</button>
 
 		</form>
 	</div>

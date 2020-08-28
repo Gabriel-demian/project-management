@@ -9,10 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class AppErrorController implements ErrorController{
-	
+public class AppErrorController implements ErrorController {
+
 	@GetMapping("/error")
-	public String hendleError(HttpServletRequest request) {
+	public String handleError(HttpServletRequest request) {
 		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 		
 		if(status != null) {
@@ -31,13 +31,9 @@ public class AppErrorController implements ErrorController{
 		
 		return "errorpages/error";
 	}
-
+	
 	@Override
 	public String getErrorPath() {
-		// TODO Auto-generated method stub
 		return "/error";
 	}
-	
-	
-	
 }

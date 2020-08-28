@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.proy.pma.entities.Employee;
 import com.proy.pma.services.EmployeeService;
@@ -44,4 +45,30 @@ public class EmployeeController {
 		// use a redirect to prevent duplicate submissions
 		return "redirect:/employees";
 	}
+	
+	@GetMapping("/update")
+	public String displayEmployeeUpdateForm(@RequestParam("id") long theId, Model model) {
+		
+		Employee theEmp = empService.findByEmployeeId(theId);
+		
+		model.addAttribute("employee", theEmp);
+		
+		return "employees/new-employee";
+	}
+	
+	@GetMapping("delete")
+	public String deleteEmployee(@RequestParam("id") long theId, Model model) {
+		Employee theEmp = empService.findByEmployeeId(theId);
+		
+		empService.delete(theEmp);
+		
+		return "redirect:/employees";
+	}
+	
+	
+	
+	
+	
+	
+	
 }

@@ -8,8 +8,8 @@
 	<nav th:replace="layouts :: navbar"></nav>
 	
 	<div class="form-group">
-		<form action="/projects/save" th:object="${project}" method="POST" >
-
+		<!--  <form action="/projects/save" th:object="${project}" method="POST" > -->
+		<form th:action="@{/projects/save}" th:object="${project}" method="POST">
 			<input  class="form-control" type="text" placeholder="Project Name" th:field="${project.name}">
 
 			<select class="form-control form-control-sm" th:field="${project.stage}">
@@ -27,7 +27,7 @@
 						th:text= ${employee.firstName}> <!-- ${allEmployees} will define this variable in the java code -->
 			</select>
 			
-			<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+			<!-- <input type="hidden" name="_csrf" th:value="${_csrf.token}" /> -->
 			
 			<button type="submit">Create Project</button>
 
