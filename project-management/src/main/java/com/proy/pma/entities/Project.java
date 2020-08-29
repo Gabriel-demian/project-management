@@ -1,5 +1,6 @@
 package com.proy.pma.entities;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,7 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Size;
-
+import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
@@ -36,6 +37,13 @@ public class Project {
 	@NotNull
 	@Size(min=2, max=200, message = "Description must be between 2 and 200 characters")
 	private String description;
+	
+	@NotBlank(message="date cannot be empty")
+	private Date startDate;
+	
+	@NotBlank(message="date cannot be empty")
+	private Date endDate;
+	
 	
 	//@OneToMany(mappedBy="project")
 	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.LAZY)
@@ -105,6 +113,23 @@ public class Project {
 		this.description = description;
 	}
 
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	
 	// Convenience method:
 //	public void addEmployee(Employee emp) {
 //		if(employees==null) {
