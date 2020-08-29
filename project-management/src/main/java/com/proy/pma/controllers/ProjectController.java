@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -81,5 +82,25 @@ public class ProjectController {
 		model.addAttribute("projectTimeList", jsonTimelineString);
 		
 		return "projects/project-timelines";
+	}
+	
+	
+	@GetMapping("/update")
+	public String displayEmployeeUpdateForm(@RequestParam("id") long theId, Model model) {
+		
+		Project theProy = proService.findByProjectId(theId);
+		
+		model.addAttribute("project", theProy);
+		
+		return "projects/new-project";
+	}
+	
+	@GetMapping("delete")
+	public String deleteEmployee(@RequestParam("id") long theId, Model model) {
+		Project theProy = proService.findByProjectId(theId);
+		
+		proService.delete(theProy);
+		
+		return "redirect:/projects";
 	}
 }
