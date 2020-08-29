@@ -19,7 +19,7 @@
 			<h3>Project</h3>
 			
 			<div class="" >
-				<input  class="form-control" type="text" placeholder="Project Name" th:field="${project.name}" >
+				<input  class="form-control" type="text" placeholder="Project Name" th:field="${project.name}" required >
 			</div>
 			
 			<br>
@@ -33,7 +33,7 @@
 			</div>
 			<br>
 			<div class="">
-				<textarea type="text" placeholder="Enter Project Description" th:field="${project.description}" class="form-control"></textarea>
+				<textarea type="text" placeholder="Enter Project Description" th:field="${project.description}" class="form-control" required></textarea>
 			</div>
 			<br>
 			<div class="">
@@ -49,13 +49,13 @@
 			
 			Project Start Date:
 			<div class="" >
-				<input id="dp3" type="text" class="form-control" value="Start Date" th:field="${project.startDate}">
+				<input id="dp3" type="text" class="form-control" value="Start Date" th:field="${project.startDate}" required>
 			</div>
 			
 			
 			Project End Date:
 			<div class="">
-				<input id="dp4" type="text" class="form-control" value="End Date" th:field="${project.endDate}">
+				<input id="dp4" type="text" class="form-control" value="End Date" th:field="${project.endDate}" required>
 			</div>
 			
 			<script type="text/javascript">
