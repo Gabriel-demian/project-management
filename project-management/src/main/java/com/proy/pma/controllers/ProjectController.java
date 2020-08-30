@@ -90,6 +90,11 @@ public class ProjectController {
 		
 		Project theProy = proService.findByProjectId(theId);
 		
+		Iterable<Employee> employees = empService.getAll();
+		
+		model.addAttribute("allEmployees", employees);
+				
+		
 		model.addAttribute("project", theProy);
 		
 		return "projects/new-project";
